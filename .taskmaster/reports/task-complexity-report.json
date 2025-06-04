@@ -1,0 +1,21 @@
+{
+  "meta": {
+    "generatedAt": "2025-06-04T03:14:52.179Z",
+    "tasksAnalyzed": 1,
+    "totalTasks": 20,
+    "analysisCount": 1,
+    "thresholdScore": 5,
+    "projectName": "Taskmaster",
+    "usedResearch": true
+  },
+  "complexityAnalysis": [
+    {
+      "taskId": 1,
+      "taskTitle": "Setup Vue.js Frontend Project",
+      "complexityScore": 6,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the Vue.js frontend project setup into specific steps, including project initialization, dependency installation, configuration, and initial testing.",
+      "reasoning": "The task involves multiple steps and configurations, requiring familiarity with Vue.js ecosystem and best practices. While not extremely complex, it involves several interconnected components and setup processes."
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+// Colors
+$primary: #42b883;
+$secondary: #35495e;
+$accent: #82B1FF;
+$error: #FF5252;
+$info: #2196F3;
+$success: #4CAF50;
+$warning: #FFC107;
+
+// Typography
+$font-family: 'Roboto', sans-serif;
+$font-size-base: 16px;
+$line-height-base: 1.5;
+
+// Spacing
+$spacing-unit: 8px;
+$spacing-small: $spacing-unit;
+$spacing-medium: $spacing-unit * 2;
+$spacing-large: $spacing-unit * 3;
+
+// Breakpoints
+$breakpoint-sm: 600px;
+$breakpoint-md: 960px;
+$breakpoint-lg: 1264px;
+$breakpoint-xl: 1904px;
+
+// Border radius
+$border-radius: 4px;
+$border-radius-large: 8px;
+
+// Transitions
+$transition-duration: 0.3s;
+$transition-timing: ease-in-out;
+
+// Color System Variables
+
+// Text Colors
+$text-primary: #212121;
+$text-light: #F8F8F8;
+
+// Button Colors
+$primary: #3DA9FC;
+$secondary: #F48C8C;
+$outline-dark: #212121;
+
+// Alert/State Colors
+$success: #4CB5AE;
+$warning: #F9C74F;
+$info: #3DA9FC;
+$disabled: #7A7A7A;
+
+// Background Colors
+$background-primary: #F8F8F8;
+$background-accent: #EAF6FE;
+$background-coral: #F48C8C;
+
+// Utility Classes
+:root {
+  // Text Colors
+  --text-primary: #{$text-primary};
+  --text-light: #{$text-light};
+  
+  // Button Colors
+  --primary: #{$primary};
+  --secondary: #{$secondary};
+  --outline-dark: #{$outline-dark};
+  
+  // Alert/State Colors
+  --success: #{$success};
+  --warning: #{$warning};
+  --info: #{$info};
+  --disabled: #{$disabled};
+  
+  // Background Colors
+  --background-primary: #{$background-primary};
+  --background-accent: #{$background-accent};
+  --background-coral: #{$background-coral};
+}
+
+// Utility Classes
+.text-primary { color: $text-primary !important; }
+.text-light { color: $text-light !important; }
+.bg-primary { background-color: $primary !important; }
+.bg-secondary { background-color: $secondary !important; }
+.bg-success { background-color: $success !important; }
+.bg-warning { background-color: $warning !important; }
+.bg-info { background-color: $info !important; }
+.bg-disabled { background-color: $disabled !important; }
+.bg-light { background-color: $background-primary !important; }
+.bg-accent { background-color: $background-accent !important; }
+.bg-coral { background-color: $background-coral !important; }
+
+// Button Styles
+.btn-primary {
+  background-color: $primary !important;
+  color: $text-light !important;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn-secondary {
+  background-color: $secondary !important;
+  color: $text-light !important;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.btn-outline {
+  border: 2px solid $outline-dark !important;
+  color: $outline-dark !important;
+  background-color: transparent !important;
+  &:hover {
+    background-color: rgba($outline-dark, 0.05) !important;
+  }
+}
+
+// Alert Styles
+.alert {
+  &-success {
+    background-color: $success !important;
+    color: $text-light !important;
+  }
+  &-warning {
+    background-color: $warning !important;
+    color: $text-primary !important;
+  }
+  &-info {
+    background-color: $info !important;
+    color: $text-light !important;
+  }
+}
+
+// Section Backgrounds
+.section {
+  &-light {
+    background-color: $background-primary !important;
+  }
+  &-accent {
+    background-color: $background-accent !important;
+  }
+  &-coral {
+    background-color: $background-coral !important;
+  }
+} 

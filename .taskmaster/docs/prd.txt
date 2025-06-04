@@ -1,0 +1,181 @@
+<context>
+# Overview  
+{
+    Platform ini adalah ruang digital gamified yang mempertemukan mahasiswa dengan mentor profesional dari industri nyata. Tujuannya adalah membantu mahasiswa menumbuhkan awareness terhadap arah karier mereka, memahami langkah-langkah yang dibutuhkan untuk mencapainya, serta mulai membangun pengalaman dan portofolio melalui interaksi langsung dengan dunia kerja. Masalah yang disolusikan: - Mahasiswa sering overestimate kemampuan tanpa tahu ekspektasi dunia kerja. - Kurang memahami pilihan karier dan jalur untuk mencapai posisi tersebut. - Minim motivasi, tidak punya mentor atau figur yang bisa menjadi inspirasi. - Sering menunda aksi nyata karena tidak tahu harus mulai dari mana. Platform ini menghadirkan pendekatan seperti Duolingo, namun alih-alih belajar bahasa, mahasiswa menyelesaikan tantangan riil dari mentor industri sebagai “misi” untuk mengembangkan karier.
+}
+
+# Core Features  
+{
+    1. Gamified Career Missions
+    Apa: Mahasiswa menyelesaikan tugas dari mentor yang berbasis tantangan nyata di industri (disebut “Gig Offer”).
+    Kenapa: Memberikan pengalaman langsung atas masalah industri sekaligus membangun portofolio.
+    Bagaimana: Mentor membuat misi, mahasiswa memilih dan mengerjakannya, lalu hasilnya direview oleh mentor.
+
+    2. Mentorship Arena
+    Apa: Mahasiswa bisa meminta feedback, berdiskusi, atau konsultasi langsung dengan mentor.
+    Kenapa: Menumbuhkan motivasi dan pemahaman nyata terhadap dunia kerja.
+    Bagaimana: Ada sesi terbuka, 1-on-1 session, atau asynchronous Q&A berbasis thread.
+
+    3. Personalized Career Map
+    Apa: Sistem membentuk peta karier personal berdasarkan misi yang dikerjakan, feedback mentor, dan asesmen gaya belajar atau potensi karier.
+    Kenapa: Membantu mahasiswa tidak hanya tahu tujuan, tapi juga langkah nyatanya.
+    Bagaimana: Career Map akan terus berkembang seiring aktivitas dan interaksi di platform.
+
+    4. Battle Power & Rank
+    Apa: Sistem poin dan level yang tumbuh seiring aktivitas dan konsistensi.
+    Kenapa: Mendorong engagement berkelanjutan dan rasa kompetisi positif.
+    Bagaimana: Poin didapat dari misi, feedback mentor, dan habit building; rank ditentukan tiap musim (seasonal leaderboard).
+
+    5. Showcase Portfolio
+    Apa: Halaman profil yang menampilkan hasil pekerjaan mahasiswa.
+    Kenapa: Portofolio aktual yang bisa digunakan untuk apply magang/kerja.
+    Bagaimana: Portofolio terhubung dengan task-task yang diselesaikan, disertai feedback mentor dan skor penilaian.
+}
+
+# User Experience  
+{
+    - User Personas:
+    {
+        1. Mahasiswa Eksploratif (Raka, 20, semester 4)
+            Ciri: Baru sadar pentingnya karier tapi belum tahu harus mulai dari mana. Overestimate kemampuan karena IPK-nya lumayan, namun belum pernah dapat pengalaman kerja nyata.
+            Motivasi: Ingin membuktikan diri dan punya portofolio.
+            Pain Point: Bingung langkah awal, cepat kehilangan motivasi, gampang terdistraksi.
+            Goal: Mendapatkan pengalaman relevan dan role model untuk membentuk visi karier.
+
+        2. Mahasiswa Ambisius (Dita, 21, semester 6)
+            Ciri: Aktif ikut lomba dan organisasi, ingin kerja di big company, tapi merasa belum ada pengalaman real-world yang "menjual".
+            Motivasi: Portofolio yang bisa menunjang apply ke top-tier perusahaan.
+            Pain Point: Tidak tahu project seperti apa yang valuable, mentor yang kredibel susah diakses.
+            Goal: Mengerjakan proyek riil, mendapatkan feedback berkualitas dari praktisi.
+
+        3. Mentor Profesional (Pak Anton, 34, lead designer di perusahaan game)
+            Ciri: Ingin berkontribusi pada pendidikan, passionate membina talenta baru.
+            Motivasi: Mencari mentee yang serius dan bisa berkontribusi, bahkan mungkin untuk direkrut.
+            Pain Point: Tidak punya waktu banyak, butuh platform yang ringkas dan efisien.
+            Goal: Menyusun challenge dari masalah riil dan melihat penyelesaiannya dari mahasiswa yang potensial.
+    }
+    - Key user flows:
+    {
+        1. Mahasiswa masuk dan eksplorasi:
+        Login → Isi asesmen awal → Career Map awal muncul → Eksplorasi misi/gig → Pilih misi → Baca brief → Kerjakan → Submit → Dapat feedback mentor → Naik battle power → Career Map update → Portofolio update
+
+        2. Mentor Buat Misi dan Pantau Progress
+        Login → Buat Gig Offer (upload brief + criteria penilaian) → Misi tayang → Mahasiswa apply → Lihat hasil → Review submission → Beri nilai + feedback → Dapat notifikasi jika misi diselesaikan
+
+        3. Interaction Layer (Forum / Sesi 1-on-1):
+        Mahasiswa → Ajukan pertanyaan (forum thread / sesi pribadi) → Mentor balas → Diskusi berkembang → Insight tercatat di Career Map
+    }
+    - UI/UX considerations:
+    {
+        Visual Identity:
+            Gamified, tapi Profesional:
+                Kombinasi UI ala Duolingo meets GitHub, friendly namun tidak kekanak-kanakan. Maskot atau avatar digunakan, tapi opsional.
+
+        Navigasi:
+            Horizontal Flow:
+                Fokus pada progression path seperti roadmap. Misi ditampilkan secara progresif berdasarkan level dan interest.
+                Tombol CTA selalu jelas: “Mulai Misi”, “Tanya Mentor”, “Lihat Career Map”.
+
+        Interaksi & Feedback:
+            Feedback loop cepat:
+                Mahasiswa tahu hasil kerja mereka dan bagaimana meningkatkannya. Sistem harus bisa highlight mentor feedback secara visual dan actionable (misalnya tag: “kurang riset”, “clarify problem”).
+
+        Portfolio Showcase:
+            Integrasi yang clean dan shareable:
+                Portofolio disusun otomatis dari task yang diselesaikan. Bisa diatur private/public. Ada badge & endorsement dari mentor (mirip LinkedIn).
+
+        Retensi & Engagement:
+            Battle Power decay:
+                Memotivasi untuk terus engage tanpa harus “spam”.
+            Daily/Weekly Quest:
+                Ada habit tracker kecil yang mendorong mahasiswa untuk login dan eksplorasi.
+
+        Responsif & Aksesibel:
+            Mobile-first design.
+            Mahasiswa harus bisa eksplorasi dan submit tugas dari HP.
+            Mentor bisa review submission dan memberi feedback lewat HP saat luang.
+    }
+}
+</context>
+
+
+<PRD>
+# Technical Architecture  
+**System Components**: 
+- Frontend Web App (Vue.js atau Next.js) 
+- Backend API (Node.js, Supabase/Firebase) 
+- Authentication & Authorization 
+- Task Management Module 
+- Gamification Engine 
+- Real-Time Chat/Forum System 
+- Notification System 
+**Data Models**: 
+- User (Mahasiswa/Mentor) 
+- Task/Gig 
+- Submission 
+- Feedback 
+- Points & Rank 
+- Career Map 
+**APIs & Integrations**: 
+- OAuth via Google/SSO Kampus 
+- Supabase/Firebase Auth & DB 
+- Optional: Integration dengan LinkedIn (untuk showcase) 
+**Infrastructure Requirements**: 
+- Supabase/Firebase Hosting 
+- Storage for submission files (image/video/doc) 
+- CDN for media & assets - Scalable DB & auth layer
+
+
+# Development Roadmap  
+Phase 1 – MVP (Usable Prototype)
+- User Registration & Role (mentor/mahasiswa)
+- Mentor bisa buat task / misi sederhana
+- Mahasiswa bisa pilih task dan submit hasil
+- Mentor bisa beri feedback
+- Basic gamification: poin & leaderboard
+- Profile + portfolio awal
+
+Phase 2 – Gamified Loop v1
+- Penambahan sistem Battle Power, Rank, dan Season
+- Sistem Career Map awal (visualisasi dan milestone)
+- Notifikasi dan reminder
+- Forum diskusi dengan mentor
+
+Phase 3 – Mentorship & Personalization
+- Fitur mentor request / sesi 1-on-1
+- Asesmen karakter/karier untuk pembentukan profil awal
+- Sistem rekomendasi task berdasarkan minat dan skor
+
+Phase 4 – Showcase & Industry Link
+- Portofolio terhubung ke profil publik
+- Validasi/rekomendasi oleh mentor
+- Dashboard mitra industri untuk melihat talent pool
+
+
+# Logical Dependency Chain
+- Foundation: Auth, role system, task creation/submission, feedback.
+- Core usability: Mahasiswa bisa lihat tugas, kerjakan, dan dapat respons.
+- Gamification loop: Poin, rank, leaderboard — memperkuat engagement.
+- Personalization layer: Career map, asesmen, dan rekomendasi task.
+- Mentorship: 1-on-1 session & open thread discussion.
+- Showcase layer: Portofolio publik dan dashboard pencarian talent.
+
+
+# Risks and Mitigations  
+- Technical challenge: Real-time mentorship atau threaded discussion → mulai dari async Q&A sebelum video call.
+- MVP clarity: Fokus MVP hanya pada siklus: buat task → kerjakan → feedback.
+- Resource: Mentor availability → siapkan sistem batch & notifikasi terjadwal.
+- Gamifikasi bisa gimmick: Semua elemen gamifikasi berbasis kontribusi nyata & feedback profesional, bukan hanya kosmetik.
+
+
+# Appendix  
+- Research findings
+-- Banyak mahasiswa tidak punya bayangan jelas tentang dunia kerja.
+-- Motivasi tumbuh jika ada koneksi dengan mentor dan pengalaman nyata.
+-- Portofolio dan real project experience menjadi nilai lebih saat apply kerja.
+
+- Technical specifications
+-- Frontend: Vue.js
+-- Backend: Supabase (Auth, DB, Storage), optional Firebase Functions
+-- Deployment: Netlify untuk frontend; Supabase backend
+</PRD>
