@@ -1,16 +1,33 @@
 <template>
-  <v-container class="fill-height">
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="6" class="text-center">
-        <h1 class="text-h2 mb-4">404</h1>
-        <h2 class="text-h4 mb-6">Page Not Found</h2>
-        <p class="mb-6">The page you're looking for doesn't exist or has been moved.</p>
-        <v-btn color="primary" to="/">
-          Return Home
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div class="pa-6">
+    <v-container class="text-center">
+      <v-row class="align-center" style="min-height: 80vh;">
+        <v-col cols="12">
+          <v-icon
+            size="100"
+            color="primary"
+            class="mb-6"
+          >
+            mdi-map-marker-question
+          </v-icon>
+          
+          <h1 class="text-h3 mb-4">Waduh, Nyasar! 😅</h1>
+          
+          <p class="text-h6 mb-8">
+            Halaman yang kamu cari nggak ketemu nih. Yuk, balik ke jalan yang bener!
+          </p>
+
+          <v-btn
+            color="primary"
+            size="x-large"
+            to="/"
+          >
+            Balik ke Beranda
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script setup>

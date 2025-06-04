@@ -1,34 +1,33 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { supabase } from './plugins/supabase'
+import { supabase } from '@/lib/supabaseClient'
 import { useAuthStore } from '@/stores/auth'
+import AppNavigation from '@/components/layout/AppNavigation.vue'
 
 const authStore = useAuthStore()
 
 // Test Supabase connection on component mount
 onMounted(async () => {
   try {
-    // Simple health check
-    const { data, error } = await supabase.rpc('get_service_status')
-    if (error) {
-      console.log('Connected to Supabase, but need to set up database functions')
-    } else {
-      console.log('Successfully connected to Supabase!')
-    }
-    
-    // Test auth connection
+    // Initialize auth state
     const { data: { session } } = await supabase.auth.getSession()
-    console.log('Auth status:', session ? 'Authenticated' : 'Not authenticated')
-    
-    authStore.initializeAuth()
-  } catch (err) {
-    console.error('Error testing Supabase connection:', err.message)
+    if (session) {
+      authStore.user = session.user
+    }
+
+    // Listen for auth changes
+    supabase.auth.onAuthStateChange((_event, session) => {
+      authStore.user = session?.user ?? null
+    })
+  } catch (error: any) {
+    console.error('Error initializing auth:', error.message)
   }
 })
 </script>
 
 <template>
   <v-app>
+    <app-navigation />
     <v-main>
       <router-view />
     </v-main>

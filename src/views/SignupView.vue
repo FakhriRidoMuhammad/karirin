@@ -3,7 +3,7 @@
     <v-container class="fill-height">
       <v-row align="center" justify="center">
         <v-col cols="12" sm="10" md="8" lg="6" xl="4">
-          <login-form />
+          <signup-form />
         </v-col>
       </v-row>
     </v-container>
@@ -11,5 +11,5 @@
 </template>
 
 <script setup lang="ts">
-import LoginForm from '@/components/auth/LoginForm.vue'
+import SignupForm from '@/components/auth/SignupForm.vue'
 </script> 

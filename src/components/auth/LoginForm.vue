@@ -1,72 +1,102 @@
 <template>
-  <v-card class="mx-auto pa-6" max-width="400">
-    <v-card-title class="text-h5 mb-4">
-      Login to Karirin
+  <v-card class="mx-auto" max-width="400">
+    <v-card-title class="text-center pt-4 text-h5">
+      Yuk, Masuk! 👋
     </v-card-title>
+    
+    <v-card-text>
+      <v-form @submit.prevent="handleSubmit" v-model="isValid">
+        <v-text-field
+          v-model="email"
+          :rules="emailRules"
+          label="Email kamu"
+          prepend-inner-icon="mdi-email"
+          variant="outlined"
+          density="comfortable"
+          bg-color="white"
+          required
+          :loading="loading"
+          :disabled="loading"
+          class="mb-3"
+        />
 
-    <v-form @submit.prevent="handleSubmit" v-model="isFormValid">
-      <v-text-field
-        v-model="email"
-        label="Email"
-        type="email"
-        required
-        :rules="[rules.required, rules.email]"
-        :error-messages="errorMessage"
-      ></v-text-field>
+        <v-text-field
+          v-model="password"
+          :rules="passwordRules"
+          label="Password"
+          prepend-inner-icon="mdi-lock"
+          :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+          @click:append-inner="showPassword = !showPassword"
+          :type="showPassword ? 'text' : 'password'"
+          variant="outlined"
+          density="comfortable"
+          bg-color="white"
+          required
+          :loading="loading"
+          :disabled="loading"
+          class="mb-4"
+        />
 
-      <v-text-field
-        v-model="password"
-        label="Password"
-        :type="showPassword ? 'text' : 'password'"
-        required
-        :rules="[rules.required, rules.password]"
-        :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-        @click:append="showPassword = !showPassword"
-      ></v-text-field>
+        <v-alert
+          v-if="error"
+          type="error"
+          variant="tonal"
+          class="mb-4"
+          closable
+        >
+          {{ error }}
+        </v-alert>
 
-      <v-btn
-        block
-        color="primary"
-        type="submit"
-        :loading="loading"
-        :disabled="!isFormValid || loading"
-        class="mt-4"
-      >
-        Login
-      </v-btn>
+        <v-btn
+          block
+          color="primary"
+          size="large"
+          type="submit"
+          :loading="loading"
+          :disabled="!isValid || loading"
+          class="mb-6"
+        >
+          Masuk
+        </v-btn>
 
-      <v-divider class="my-4"></v-divider>
+        <div class="text-center mb-4">
+          <div class="text-body-2 text-medium-emphasis mb-2">atau masuk dengan</div>
+          <div class="d-flex justify-center gap-3">
+            <v-btn
+              variant="outlined"
+              prepend-icon="mdi-google"
+              @click="handleGoogleLogin"
+              :loading="loading"
+              :disabled="loading"
+              density="comfortable"
+              class="flex-grow-0"
+              min-width="120"
+            >
+              Google
+            </v-btn>
+            <v-btn
+              variant="outlined"
+              prepend-icon="mdi-github"
+              @click="handleGithubLogin"
+              :loading="loading"
+              :disabled="loading"
+              density="comfortable"
+              class="flex-grow-0"
+              min-width="120"
+            >
+              GitHub
+            </v-btn>
+          </div>
+        </div>
 
-      <v-btn
-        block
-        color="error"
-        variant="outlined"
-        @click="signInWithGoogle"
-        :loading="googleLoading"
-        :disabled="loading"
-      >
-        <v-icon start>mdi-google</v-icon>
-        Continue with Google
-      </v-btn>
-
-      <v-btn
-        block
-        color="secondary"
-        variant="outlined"
-        @click="signInWithGithub"
-        :loading="githubLoading"
-        :disabled="loading"
-        class="mt-2"
-      >
-        <v-icon start>mdi-github</v-icon>
-        Continue with GitHub
-      </v-btn>
-
-      <div class="mt-4 text-center">
-        Don't have an account?
-        <router-link to="/signup" class="text-primary">Sign up</router-link>
-      </div>
-    </v-form>
+        <div class="text-center text-body-2">
+          <span class="text-medium-emphasis">Belum punya akun? </span>
+          <router-link to="/signup" class="text-decoration-none font-weight-medium">
+            Daftar di sini
+          </router-link>
+        </div>
+      </v-form>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -74,7 +104,6 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
-import { supabase } from '@/lib/supabaseClient'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -83,65 +112,60 @@ const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const loading = ref(false)
-const googleLoading = ref(false)
-const githubLoading = ref(false)
-const errorMessage = ref('')
-const isFormValid = ref(false)
+const error = ref('')
+const isValid = ref(false)
 
-const rules = {
-  required: (v: string) => !!v || 'This field is required',
-  email: (v: string) => /.+@.+\..+/.test(v) || 'Please enter a valid email',
-  password: (v: string) => v.length >= 6 || 'Password must be at least 6 characters',
-}
+const emailRules = [
+  (v: string) => !!v || 'Email harus diisi',
+  (v: string) => /.+@.+\..+/.test(v) || 'Email tidak valid'
+]
+
+const passwordRules = [
+  (v: string) => !!v || 'Password harus diisi',
+  (v: string) => v.length >= 6 || 'Password minimal 6 karakter'
+]
 
 async function handleSubmit() {
-  if (!isFormValid.value) return
-
+  if (!isValid.value) return
+  
   try {
     loading.value = true
-    errorMessage.value = ''
-    await authStore.signIn(email.value, password.value)
+    error.value = ''
+    
+    await authStore.signInWithEmail(email.value, password.value)
     router.push('/dashboard')
-  } catch (error: any) {
-    errorMessage.value = error.message
+  } catch (err: any) {
+    error.value = err.message || 'Waduh, ada masalah nih. Coba lagi ya!'
   } finally {
     loading.value = false
   }
 }
 
-async function signInWithGoogle() {
+async function handleGoogleLogin() {
   try {
-    googleLoading.value = true
-    errorMessage.value = ''
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${window.location.origin}/dashboard`
-      }
-    })
-    if (error) throw error
-  } catch (error: any) {
-    errorMessage.value = error.message
+    loading.value = true
+    error.value = ''
+    
+    await authStore.signInWithGoogle()
+    router.push('/dashboard')
+  } catch (err: any) {
+    error.value = err.message || 'Gagal masuk dengan Google. Coba lagi ya!'
   } finally {
-    googleLoading.value = false
+    loading.value = false
   }
 }
 
-async function signInWithGithub() {
+async function handleGithubLogin() {
   try {
-    githubLoading.value = true
-    errorMessage.value = ''
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: {
-        redirectTo: `${window.location.origin}/dashboard`
-      }
-    })
-    if (error) throw error
-  } catch (error: any) {
-    errorMessage.value = error.message
+    loading.value = true
+    error.value = ''
+    
+    await authStore.signInWithGithub()
+    router.push('/dashboard')
+  } catch (err: any) {
+    error.value = err.message || 'Gagal masuk dengan GitHub. Coba lagi ya!'
   } finally {
-    githubLoading.value = false
+    loading.value = false
   }
 }
 </script> 
