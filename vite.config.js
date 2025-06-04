@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-<<<<<<< HEAD
 import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
@@ -32,11 +31,4 @@ export default defineConfig({
       ]
     }
   }
-}) 
-=======
-
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [vue()],
 })
->>>>>>> origin/main

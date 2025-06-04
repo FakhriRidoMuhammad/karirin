@@ -1,5 +1,4 @@
 import { createApp } from 'vue'
-<<<<<<< HEAD
 import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
@@ -15,10 +14,4 @@ app.use(router)
 app.use(vuetify)
 
 // Mount the app
-app.mount('#app') 
-=======
-import './style.css'
-import App from './App.vue'
-
-createApp(App).mount('#app')
->>>>>>> origin/main
+app.mount('#app')
