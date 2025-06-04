@@ -1,20 +1,38 @@
-<<<<<<< HEAD
-<template>
-  <header>
-    <div class="wrapper">
-      <h1>Karirin</h1>
-      <p class="tagline">Career Development Platform with Mentorship & Gamification</p>
-    </div>
-  </header>
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { supabase } from './plugins/supabase'
+import { useAuthStore } from '@/stores/auth'
 
-  <main>
-    <div class="wrapper">
-      <p class="description">
-        Welcome to Karirin, where professional growth meets gamification. Track your career progress,
-        connect with mentors, and level up your skills in an engaging way.
-      </p>
-    </div>
-  </main>
+const authStore = useAuthStore()
+
+// Test Supabase connection on component mount
+onMounted(async () => {
+  try {
+    // Simple health check
+    const { data, error } = await supabase.rpc('get_service_status')
+    if (error) {
+      console.log('Connected to Supabase, but need to set up database functions')
+    } else {
+      console.log('Successfully connected to Supabase!')
+    }
+    
+    // Test auth connection
+    const { data: { session } } = await supabase.auth.getSession()
+    console.log('Auth status:', session ? 'Authenticated' : 'Not authenticated')
+    
+    authStore.initializeAuth()
+  } catch (err) {
+    console.error('Error testing Supabase connection:', err.message)
+  }
+})
+</script>
+
+<template>
+  <v-app>
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped>
@@ -49,36 +67,4 @@ h1 {
   line-height: 1.6;
   color: #2c3e50;
 }
-</style> 
-=======
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
-<template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-</template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
 </style>
->>>>>>> origin/main

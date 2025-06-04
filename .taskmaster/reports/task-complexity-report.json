@@ -1,9 +1,9 @@
 {
   "meta": {
-    "generatedAt": "2025-06-04T03:14:52.179Z",
+    "generatedAt": "2025-06-04T05:39:12.023Z",
     "tasksAnalyzed": 1,
     "totalTasks": 20,
-    "analysisCount": 1,
+    "analysisCount": 2,
     "thresholdScore": 5,
     "projectName": "Taskmaster",
     "usedResearch": true
@@ -16,6 +16,14 @@
       "recommendedSubtasks": 5,
       "expansionPrompt": "Break down the Vue.js frontend project setup into specific steps, including project initialization, dependency installation, configuration, and initial testing.",
       "reasoning": "The task involves multiple steps and configurations, requiring familiarity with Vue.js ecosystem and best practices. While not extremely complex, it involves several interconnected components and setup processes."
+    },
+    {
+      "taskId": 2,
+      "taskTitle": "Setup Supabase Backend",
+      "complexityScore": 8,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "Break down the Supabase backend setup into subtasks for project creation, database schema design, authentication configuration, storage setup, and API key management.",
+      "reasoning": "This task involves multiple complex steps including project setup, database design, authentication configuration, and API integration. It requires careful planning and execution to ensure proper functionality and security."
     }
   ]
 }

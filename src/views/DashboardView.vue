@@ -1,97 +1,40 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12">
-        <h1 class="text-h4 mb-4">Your Career Dashboard</h1>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="12" md="4">
-        <v-card>
-          <v-card-title>Progress Overview</v-card-title>
-          <v-card-text>
-            <v-progress-circular
-              :rotate="360"
-              :size="100"
-              :width="15"
-              :model-value="75"
-              color="primary"
-            >
-              75%
-            </v-progress-circular>
-            <div class="mt-4">Current Level: Professional</div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="4">
-        <v-card>
-          <v-card-title>Recent Achievements</v-card-title>
-          <v-list>
-            <v-list-item v-for="achievement in recentAchievements" :key="achievement.id">
-              <v-list-item-icon>
-                <v-icon :color="achievement.color">{{ achievement.icon }}</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>{{ achievement.title }}</v-list-item-title>
-                <v-list-item-subtitle>{{ achievement.date }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-card>
-      </v-col>
-
-      <v-col cols="12" md="4">
-        <v-card>
-          <v-card-title>Upcoming Goals</v-card-title>
-          <v-list>
-            <v-list-item v-for="goal in upcomingGoals" :key="goal.id">
-              <v-list-item-icon>
-                <v-icon>mdi-flag</v-icon>
-              </v-list-item-icon>
-              <v-list-item-content>
-                <v-list-item-title>{{ goal.title }}</v-list-item-title>
-                <v-list-item-subtitle>Due: {{ goal.dueDate }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div class="pa-6">
+    <h1>Dashboard</h1>
+    <v-card class="mt-4 pa-4">
+      <div class="d-flex align-center justify-space-between">
+        <div>
+          <p class="text-h6">Welcome, {{ userEmail }}</p>
+          <p class="text-subtitle-1">You are logged in!</p>
+        </div>
+        <v-btn color="error" @click="handleLogout" :loading="loading">
+          Logout
+        </v-btn>
+      </div>
+    </v-card>
+  </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
-const recentAchievements = ref([
-  {
-    id: 1,
-    title: 'Completed Profile',
-    date: '2024-06-01',
-    icon: 'mdi-account-check',
-    color: 'success'
-  },
-  {
-    id: 2,
-    title: 'First Mentor Connection',
-    date: '2024-06-02',
-    icon: 'mdi-account-multiple',
-    color: 'info'
-  }
-])
+const router = useRouter()
+const authStore = useAuthStore()
+const loading = ref(false)
 
-const upcomingGoals = ref([
-  {
-    id: 1,
-    title: 'Complete Skill Assessment',
-    dueDate: '2024-06-10'
-  },
-  {
-    id: 2,
-    title: 'Schedule Mentor Meeting',
-    dueDate: '2024-06-15'
+const userEmail = authStore.userEmail
+
+async function handleLogout() {
+  try {
+    loading.value = true
+    await authStore.signOut()
+    router.push('/login')
+  } catch (error) {
+    console.error('Logout error:', error)
+  } finally {
+    loading.value = false
   }
-])
+}
 </script> 
