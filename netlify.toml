@@ -1,11 +1,12 @@
 [build]
-  base = "karirin"
+  base = "."
   command = """
+    cd karirin &&
     npm install &&
     npm install @rollup/rollup-linux-x64-gnu &&
     npm run build
   """
-  publish = "dist"
+  publish = "karirin/dist"
 
 [build.environment]
   NODE_VERSION = "18"
