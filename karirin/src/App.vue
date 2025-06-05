@@ -1,30 +1,35 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+// Import Vuetify components
+import { ref } from 'vue'
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+
+const title = ref('Karirin App')
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <v-app>
+    <v-app-bar app>
+      <v-app-bar-title>{{ title }}</v-app-bar-title>
+    </v-app-bar>
+
+    <v-main>
+      <v-container>
+        <v-row>
+          <v-col>
+            <v-card>
+              <v-card-title>Welcome to Karirin</v-card-title>
+              <v-card-text>
+                Your application content goes here.
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
+  </v-app>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+/* Add your custom styles here */
 </style>
