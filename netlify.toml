@@ -11,6 +11,8 @@
 [build.environment]
   NODE_VERSION = "18"
   VITE_BASE_URL = "/"
+  # Allow these environment variables to be exposed in client-side code
+  SECRETS_SCAN_OMIT_KEYS = "VITE_SUPABASE_URL,VITE_SUPABASE_ANON_KEY"
 
 # Handle SPA routing
 [[redirects]]
