@@ -1,19 +1,19 @@
 [build]
-  base = "karirin"
-  command = """
+  command = \"\"\"
+    cd karirin &&
     rm -rf node_modules package-lock.json &&
     npm install &&
     npm install @rollup/rollup-linux-x64-gnu &&
     npm run build
-  """
-  publish = "dist"
+  \"\"\"
+  publish = \"karirin/dist\"
 
 [build.environment]
-  NODE_VERSION = "18"
-  VITE_BASE_URL = "/"
+  NODE_VERSION = \"18\"
+  VITE_BASE_URL = \"/\"
 
 # Handle SPA routing
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = \"/*\"
+  to = \"/index.html\"
   status = 200 

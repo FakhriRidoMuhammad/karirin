@@ -12,10 +12,10 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': path.resolve(__dirname, 'src')
     }
   },
-  base: process.env.VITE_BASE_URL || '/',
+  base: './',
   server: {
     port: 5173,
     host: true
@@ -34,9 +34,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: path.resolve(__dirname, 'index.html')
-      },
-      output: {
-        manualChunks: undefined
       }
     }
   },
