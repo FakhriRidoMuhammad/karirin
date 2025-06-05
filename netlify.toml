@@ -6,10 +6,11 @@
     npm install @rollup/rollup-linux-x64-gnu &&
     npm run build
   """
-  publish = "karirin/dist"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
+  VITE_BASE_URL = "/"
 
 # Handle SPA routing
 [[redirects]]

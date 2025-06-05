@@ -15,7 +15,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src')
     }
   },
-  base: '/',
+  base: process.env.VITE_BASE_URL || '/',
   server: {
     port: 5173,
     host: true
@@ -30,10 +30,14 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: path.resolve(__dirname, 'index.html'),
+        main: path.resolve(__dirname, 'index.html')
       },
+      output: {
+        manualChunks: undefined
+      }
     }
   },
   test: {
